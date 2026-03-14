@@ -124,12 +124,3 @@ A browser window will open where you can input customer details and predict chur
 * Interactive Streamlit web application
 
 ---
-
-## Future Improvements
-
-* Add more ML models for comparison
-* Improve feature engineering
-* Deploy the application online
-* Add model evaluation metrics and visualization
-
----
