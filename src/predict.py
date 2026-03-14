@@ -1,41 +1,10 @@
-import pandas as pd
 import pickle
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
+import numpy as np
 
-print("Starting training...")
+model = pickle.load(open("models/churn_model.pkl","rb"))
 
-# load dataset
-df = pd.read_csv("../data/churn.csv")
+sample = np.array([[600,40,5,10000,2,1,1,50000,0,1,1]])
 
-print("Dataset loaded")
+prediction = model.predict(sample)
 
-# drop unnecessary columns
-df = df.drop(["RowNumber","CustomerId","Surname"], axis=1)
-
-# encode categorical variables
-df = pd.get_dummies(df, columns=["Geography","Gender"], drop_first=True)
-
-print("Preprocessing done")
-
-# split features and target
-X = df.drop("Exited", axis=1)
-y = df["Exited"]
-
-# train-test split
-X_train, X_test, y_train, y_test = train_test_split(
-    X,y,test_size=0.2,random_state=42
-)
-
-print("Training model...")
-
-# train model
-model = RandomForestClassifier()
-model.fit(X_train,y_train)
-
-print("Training finished")
-
-# save model
-pickle.dump(model, open("../models/churn_model.pkl","wb"))
-
-print("Model saved in models folder")
+print("Prediction:",prediction)
